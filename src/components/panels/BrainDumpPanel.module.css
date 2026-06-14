@@ -1,6 +1,6 @@
 .panel {
   padding: var(--space-lg);
-  animation: fadeInUp 0.3s ease-out;
+  animation: panelSlideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header {
@@ -20,6 +20,7 @@
   justify-content: center;
   color: var(--green-200);
   flex-shrink: 0;
+  animation: iconPulse 3s ease-in-out infinite;
 }
 
 .title {
@@ -32,6 +33,7 @@
 .subtitle {
   font-size: 13px;
   color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .inputSection {
@@ -48,7 +50,7 @@
   color: var(--text-primary);
   line-height: 1.6;
   resize: vertical;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   font-family: var(--font-sans);
 }
 
@@ -69,13 +71,15 @@
   margin-top: var(--space-sm);
   font-size: 12px;
   color: var(--primary-glow);
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  border: 1px solid transparent;
 }
 
 .sampleBtn:hover {
   background: var(--primary-muted);
+  border-color: var(--primary-border);
 }
 
 .options {
@@ -155,13 +159,22 @@
   margin-top: var(--space-xl);
 }
 
-@keyframes fadeInUp {
+@keyframes panelSlideIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateX(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(45, 106, 79, 0);
   }
 }

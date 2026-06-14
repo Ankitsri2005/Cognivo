@@ -20,7 +20,6 @@
   width: var(--sidebar-collapsed);
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -40,6 +39,12 @@
   justify-content: center;
   color: var(--green-200);
   flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.logo:hover .logoIcon {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(45, 106, 79, 0.3);
 }
 
 .logoText {
@@ -63,7 +68,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Navigation */
 .nav {
   padding: var(--space-md);
   display: flex;
@@ -94,11 +98,13 @@
   color: var(--text-secondary);
   transition: all var(--transition-fast);
   white-space: nowrap;
+  position: relative;
 }
 
 .navItem:hover {
   background: var(--bg-hover);
   color: var(--text-primary);
+  transform: translateX(2px);
 }
 
 .active {
@@ -107,7 +113,17 @@
   border: 1px solid var(--primary-border);
 }
 
-/* Actions */
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 3px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--primary-glow);
+}
+
 .actions {
   padding: var(--space-md);
   display: flex;
@@ -133,6 +149,7 @@
 .actionItem:hover {
   background: var(--bg-hover);
   color: var(--text-primary);
+  transform: translateX(2px);
 }
 
 .actionIcon {
@@ -142,7 +159,6 @@
   flex-shrink: 0;
 }
 
-/* Add Button */
 .addBtnWrap {
   padding: var(--space-md);
   margin-top: auto;
@@ -167,9 +183,9 @@
 .addBtn:hover {
   background: linear-gradient(135deg, var(--green-700), var(--green-600));
   box-shadow: 0 4px 16px rgba(45, 106, 79, 0.3);
+  transform: translateY(-1px);
 }
 
-/* Toggle */
 .toggle {
   position: absolute;
   top: 50%;
@@ -192,4 +208,20 @@
   background: var(--bg-hover);
   color: var(--primary-glow);
   border-color: var(--primary-border);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width) !important;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.6);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .toggle {
+    display: none;
+  }
 }

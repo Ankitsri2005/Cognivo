@@ -5,7 +5,8 @@
 .axisLabels {
   display: flex;
   justify-content: space-between;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: 0 var(--space-xs);
 }
 
 .axisY,
@@ -20,27 +21,34 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 
 .quadrant {
   border: 1px solid;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-md);
-  min-height: 140px;
-  transition: all var(--transition-fast);
+  min-height: 150px;
+  transition: all var(--transition-base);
+  opacity: 0;
+  animation: quadFadeIn 0.4s ease-out both;
 }
 
+.quadrant:nth-child(1) { animation-delay: 0.05s; }
+.quadrant:nth-child(2) { animation-delay: 0.12s; }
+.quadrant:nth-child(3) { animation-delay: 0.19s; }
+.quadrant:nth-child(4) { animation-delay: 0.26s; }
+
 .quadrant:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .quadHeader {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
   padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -59,21 +67,29 @@
 
 .count {
   margin-left: auto;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   font-family: var(--font-mono);
+  letter-spacing: -1px;
 }
 
 .itemList {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .item {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .itemDot {
@@ -94,4 +110,22 @@
   font-size: 11px;
   color: var(--text-muted);
   font-style: italic;
+  padding: var(--space-sm) 0;
+}
+
+@keyframes quadFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

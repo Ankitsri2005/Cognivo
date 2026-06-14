@@ -3,7 +3,9 @@
   top: 0;
   right: 0;
   height: var(--header-height);
-  background: var(--bg-base);
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
@@ -13,10 +15,16 @@
   transition: left var(--transition-base);
 }
 
+.left {
+  display: flex;
+  align-items: center;
+}
+
 .title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text-primary);
+  letter-spacing: -0.3px;
 }
 
 .right {
@@ -33,7 +41,7 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
   padding: 6px 14px;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
   width: 220px;
 }
 
@@ -41,6 +49,7 @@
   border-color: var(--primary-border);
   background: var(--bg-elevated);
   width: 280px;
+  box-shadow: 0 0 0 3px var(--primary-muted);
 }
 
 .searchIcon {
@@ -77,8 +86,8 @@
 
 .badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 1px;
+  right: 1px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -89,4 +98,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+.mobileMenuBtn {
+  display: none;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(138, 43, 43, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(138, 43, 43, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    left: 0 !important;
+    padding: 0 var(--space-md);
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--space-md);
+    color: var(--text-primary);
+  }
+
+  .searchWrap {
+    display: none;
+  }
 }

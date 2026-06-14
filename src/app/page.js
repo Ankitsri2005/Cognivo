@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, Map, Zap, Calendar, Target, CheckSquare } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import EisenhowerMatrix from '@/components/eisenhower/EisenhowerMatrix';
@@ -13,8 +14,8 @@ export default function Dashboard() {
   const initialized = useCanvasStore((s) => s.initialized);
   const initFromStorage = useCanvasStore((s) => s.initFromStorage);
   const setActivePanel = useAppStore((s) => s.setActivePanel);
+  const router = useRouter();
 
-  // Initialize store on client side
   if (!initialized) {
     initFromStorage();
   }
@@ -23,7 +24,6 @@ export default function Dashboard() {
   const tasksCount = nodes.filter((n) => n.type === 'taskNode').length;
   const completedCount = nodes.filter((n) => n.data?.completed).length;
 
-  // Extract items for Eisenhower preview
   const matrixItems = nodes
     .filter((n) => n.data?.quadrant && !n.data?.completed)
     .map((n) => ({
@@ -41,7 +41,6 @@ export default function Dashboard() {
       >
         <div className={styles.content}>
           <div className="bento-grid">
-            {/* Hero Card */}
             <div className={`glass-card bento-span-4 ${styles.heroCard}`}>
               <div className={styles.heroContent}>
                 <h2 className={styles.heroTitle}>
@@ -56,7 +55,10 @@ export default function Dashboard() {
                   </Link>
                   <button
                     className={styles.secondaryBtn}
-                    onClick={() => setActivePanel('brain-dump')}
+                    onClick={() => {
+                      setActivePanel('brain-dump');
+                      router.push('/canvas');
+                    }}
                   >
                     <Zap size={16} /> Smart Brain Dump
                   </button>
@@ -64,7 +66,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Stats Cards */}
             <div className={`glass-card glass-card-hover ${styles.statCard}`}>
               <div className={styles.statIcon} style={{ color: 'var(--green-500)', background: 'var(--primary-muted)' }}>
                 <Target size={20} />
@@ -105,7 +106,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Eisenhower Matrix Preview */}
             <div className={`glass-card bento-span-4 ${styles.matrixCard}`}>
               <div className={styles.cardHeader}>
                 <h3 className={styles.cardTitle}>Priority Matrix</h3>
@@ -120,7 +120,10 @@ export default function Dashboard() {
                   <p>No prioritized tasks yet.</p>
                   <button
                     className={styles.linkBtn}
-                    onClick={() => setActivePanel('brain-dump')}
+                    onClick={() => {
+                      setActivePanel('brain-dump');
+                      router.push('/canvas');
+                    }}
                   >
                     Run a Brain Dump to get started
                   </button>

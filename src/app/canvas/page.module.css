@@ -30,7 +30,7 @@
   right: 0;
   bottom: 0;
   width: 400px;
-  background: rgba(22, 33, 62, 0.95); /* Deep charcoal blue */
+  background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-left: 1px solid var(--border-default);

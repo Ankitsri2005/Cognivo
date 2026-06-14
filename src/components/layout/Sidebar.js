@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Brain,
   LayoutDashboard,
@@ -31,6 +31,7 @@ const Sidebar = () => {
   const sidebarOpen = useAppStore((s) => s.sidebarOpen);
   const toggleSidebar = useAppStore((s) => s.toggleSidebar);
   const setActivePanel = useAppStore((s) => s.setActivePanel);
+  const router = useRouter();
 
   return (
     <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.collapsed}`}>
@@ -76,7 +77,12 @@ const Sidebar = () => {
             <button
               key={item.key}
               className={styles.actionItem}
-              onClick={() => setActivePanel(item.key)}
+              onClick={() => {
+                setActivePanel(item.key);
+                if (pathname !== '/canvas') {
+                  router.push('/canvas');
+                }
+              }}
               title={!sidebarOpen ? item.label : undefined}
             >
               <span className={styles.actionIcon} style={{ color: item.color }}>
