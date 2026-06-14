@@ -2,7 +2,8 @@
 
 > Your thoughts, organized. Your tasks, prioritized.
 
-🔗 **Live Demo:** https://cognivo-wltc.onrender.com
+🔗 **Live Demo:** https://cognivowltc.onrender.com
+
 🎥 **Demo Video:** https://youtu.be/fInVPDobzoE
 ---
 
