@@ -27,14 +27,14 @@ Cognivo solves this by giving you an AI-powered visual canvas where your knowled
 
 ## 🛠️ Tech Stack
 
-- Next.js 14
-- React
+- Next.js 16
+- React 19
 - React Flow
-- Gemini API
-- MongoDB Atlas
-- Node.js
-- Tailwind CSS
-- TypeScript
+- Zustand
+- Google Gemini
+- Web Speech API
+- YouTube Transcript API
+- CSS3
 
 ---
 
