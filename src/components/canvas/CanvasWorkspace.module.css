@@ -1,0 +1,68 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.addPanel {
+  z-index: 10;
+}
+
+.addContainer {
+  position: relative;
+}
+
+.addMainBtn {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.addMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-sm);
+  animation: scaleIn 0.2s ease-out;
+  z-index: 20;
+}
+
+.addMenuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 10px var(--space-sm);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.addMenuItem:hover {
+  background: var(--bg-hover);
+}
+
+.goalIcon { color: var(--green-600); }
+.taskIcon { color: var(--green-500); }
+.milestoneIcon { color: var(--green-400); }
+
+.menuLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+}
+
+.menuDesc {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: block;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}

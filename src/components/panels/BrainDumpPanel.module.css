@@ -1,0 +1,167 @@
+.panel {
+  padding: var(--space-lg);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.headerIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--green-800), var(--green-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-200);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.inputSection {
+  margin-bottom: var(--space-md);
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--space-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color var(--transition-fast);
+  font-family: var(--font-sans);
+}
+
+.textarea:focus {
+  border-color: var(--primary-border);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.sampleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-sm);
+  font-size: 12px;
+  color: var(--primary-glow);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.sampleBtn:hover {
+  background: var(--primary-muted);
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md);
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggleTrack {
+  width: 36px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--bg-hover);
+  border: 1px solid var(--border-default);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.toggle input:checked + .toggleTrack {
+  background: var(--primary);
+  border-color: var(--primary-light);
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.toggle input:checked + .toggleTrack .toggleThumb {
+  left: 18px;
+  background: var(--green-200);
+}
+
+.toggleLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.resultActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-xl);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

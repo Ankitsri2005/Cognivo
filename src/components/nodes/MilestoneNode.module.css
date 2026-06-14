@@ -1,0 +1,74 @@
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-sm);
+  min-width: 120px;
+  transition: all var(--transition-base);
+}
+
+.diamond {
+  width: 48px;
+  height: 48px;
+  transform: rotate(45deg);
+  background: var(--bg-card);
+  border: 1.5px solid var(--primary-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.node:hover .diamond {
+  border-color: var(--primary-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+.selected .diamond {
+  border-color: var(--primary-glow) !important;
+  box-shadow: 0 0 0 2px rgba(82, 183, 136, 0.2), var(--shadow-glow) !important;
+}
+
+.completed .diamond {
+  opacity: 0.5;
+}
+
+.inner {
+  transform: rotate(-45deg);
+  color: var(--primary-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  max-width: 150px;
+}
+
+.completed .title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.deadline {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.handle {
+  background: var(--primary) !important;
+  border: 2px solid var(--bg-deep) !important;
+  width: 8px !important;
+  height: 8px !important;
+}

@@ -1,0 +1,97 @@
+.matrix {
+  position: relative;
+}
+
+.axisLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.axisY,
+.axisX {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.quadrant {
+  border: 1px solid;
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  min-height: 140px;
+  transition: all var(--transition-fast);
+}
+
+.quadrant:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.quadHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.quadLabel {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+}
+
+.quadSub {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.count {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.itemDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.itemText {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.empty {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}

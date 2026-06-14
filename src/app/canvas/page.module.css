@@ -1,0 +1,77 @@
+.main {
+  position: absolute;
+  top: var(--header-height);
+  right: 0;
+  bottom: 0;
+  transition: left var(--transition-base);
+  display: flex;
+  overflow: hidden;
+}
+
+.canvasContainer {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  background-color: var(--bg-deep);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.sidePanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  background: rgba(22, 33, 62, 0.95); /* Deep charcoal blue */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border-default);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 40;
+  overflow-y: auto;
+}
+
+.sidePanel.panelOpen {
+  transform: translateX(0);
+}
+
+.panelBackdrop {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sidePanel {
+    width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidePanel {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .panelBackdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 30;
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
