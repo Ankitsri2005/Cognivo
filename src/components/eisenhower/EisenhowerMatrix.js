@@ -61,8 +61,7 @@ const EisenhowerMatrix = ({ items = [] }) => {
               key={q.key}
               className={styles.quadrant}
               style={{
-                backgroundColor: q.bgColor,
-                borderColor: q.borderColor,
+                borderLeftColor: q.color,
               }}
             >
               <div className={styles.quadHeader}>

@@ -1,5 +1,7 @@
 .matrix {
   position: relative;
+  container-type: inline-size;
+  container-name: matrixContainer;
 }
 
 .axisLabels {
@@ -25,13 +27,17 @@
 }
 
 .quadrant {
-  border: 1px solid;
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  border-left-width: 4px; /* Glowing colored left indicator */
+  border-radius: var(--radius-md);
   padding: var(--space-md);
-  min-height: 150px;
+  background: rgba(30, 30, 30, 0.4);
+  min-height: 140px;
   transition: all var(--transition-base);
   opacity: 0;
   animation: quadFadeIn 0.4s ease-out both;
+  display: flex;
+  flex-direction: column;
 }
 
 .quadrant:nth-child(1) { animation-delay: 0.05s; }
@@ -40,16 +46,18 @@
 .quadrant:nth-child(4) { animation-delay: 0.26s; }
 
 .quadrant:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateX(2px);
+  background: rgba(45, 106, 79, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-sm);
 }
 
 .quadHeader {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -67,38 +75,45 @@
 
 .count {
   margin-left: auto;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 700;
   font-family: var(--font-mono);
-  letter-spacing: -1px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
 }
 
 .itemList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-height: 200px;
+  gap: 6px;
+  flex: 1;
+  max-height: 180px;
   overflow-y: auto;
 }
 
 .item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
-  padding: 4px 6px;
+  padding: 6px 8px;
   border-radius: var(--radius-sm);
-  transition: background var(--transition-fast);
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-fast);
 }
 
 .item:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+  transform: translateX(2px);
 }
 
 .itemDot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  margin-top: 5px;
   flex-shrink: 0;
 }
 
@@ -113,12 +128,13 @@
   color: var(--text-muted);
   font-style: italic;
   padding: var(--space-sm) 0;
+  display: block;
 }
 
 @keyframes quadFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.97);
   }
   to {
     opacity: 1;
@@ -126,13 +142,24 @@
   }
 }
 
-@media (max-width: 640px) {
+/* --- Container Query for Narrow sidePanel (under 500px) --- */
+@container matrixContainer (max-width: 500px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .quadrant {
+    min-height: auto;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .axisLabels {
+    display: none;
   }
 
   .itemList {
-    max-height: 150px;
+    max-height: 140px;
   }
 }
 
@@ -143,15 +170,11 @@
 
   .quadrant {
     padding: var(--space-sm);
-    min-height: 120px;
+    min-height: auto;
   }
 
   .quadLabel {
     font-size: 12px;
-  }
-
-  .count {
-    font-size: 16px;
   }
 
   .itemText {
