@@ -444,3 +444,24 @@ img {
 .react-flow__handle:hover {
   background: var(--primary-glow) !important;
 }
+
+/* ---- Mobile React Flow Overrides ---- */
+@media (max-width: 768px) {
+  .react-flow__controls {
+    bottom: 16px !important;
+    left: 16px !important;
+    transform: scale(0.85);
+    transform-origin: bottom left;
+  }
+
+  .react-flow__minimap {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .react-flow__controls {
+    transform: scale(0.75);
+    transform-origin: bottom left;
+  }
+}

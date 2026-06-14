@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
 const useAppStore = create((set) => ({
-  // Sidebar state
-  sidebarOpen: true,
+  sidebarOpen: typeof window !== 'undefined' ? window.innerWidth > 768 : true,
   toggleSidebar: () => set((s) => ({ sidebarOpen: !s.sidebarOpen })),
+  closeSidebar: () => set({ sidebarOpen: false }),
 
   // Active panel
   activePanel: null, // 'brain-dump' | 'youtube' | 'conflicts' | 'node-detail' | null

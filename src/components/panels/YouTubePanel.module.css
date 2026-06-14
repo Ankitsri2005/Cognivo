@@ -159,6 +159,55 @@
   justify-content: space-between;
 }
 
+@media (max-width: 768px) {
+  .panel {
+    padding: var(--space-md);
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .headerIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .urlInput {
+    flex-wrap: wrap;
+  }
+
+  .input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .resultActions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .resultActions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }

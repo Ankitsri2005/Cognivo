@@ -78,6 +78,23 @@
   color: var(--info);
 }
 
+@media (max-width: 640px) {
+  .container {
+    bottom: var(--space-md);
+    right: var(--space-md);
+    left: var(--space-md);
+    max-width: none;
+  }
+
+  .toast {
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .message {
+    font-size: 12px;
+  }
+}
+
 @keyframes slideInRight {
   from {
     opacity: 0;

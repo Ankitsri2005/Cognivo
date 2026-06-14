@@ -287,8 +287,43 @@
   .statValue {
     font-size: 22px;
   }
+  .statCard {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
   .cardHeader {
     flex-direction: column;
     gap: var(--space-xs);
+  }
+  .heroCard {
+    padding: var(--space-lg);
+  }
+  .heroContent {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 22px;
+  }
+  .heroSub {
+    font-size: 13px;
+  }
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+  .statValue {
+    font-size: 18px;
+  }
+  .statLabel {
+    font-size: 10px;
+  }
+  .cardTitle {
+    font-size: 16px;
+  }
+  .matrixCard {
+    padding: var(--space-md);
   }
 }

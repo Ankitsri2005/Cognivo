@@ -159,6 +159,55 @@
   margin-top: var(--space-xl);
 }
 
+@media (max-width: 768px) {
+  .panel {
+    padding: var(--space-md);
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .options {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .textarea {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .headerIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .resultActions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .resultActions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @keyframes panelSlideIn {
   from {
     opacity: 0;
