@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Cognivo — Visual Second Brain
 
-## Getting Started
+> Your thoughts, organized. Your tasks, prioritized.
 
-First, run the development server:
+🔗 **Live Demo:** https://cognivo-wltc.onrender.com
+🎥 **Demo Video:** https://youtu.be/fInVPDobzoE
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📌 Problem Statement
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Students and knowledge workers constantly struggle with information overload — they consume content from YouTube, attend lectures, and juggle dozens of tasks, but have no unified way to capture, connect, and prioritize it all.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Cognivo solves this by giving you an AI-powered visual canvas where your knowledge and tasks live together.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+1. **Brain Dump → Eisenhower Matrix** — Paste or speak your chaotic thoughts, and AI (Gemini 1.5 Flash) instantly sorts them into the Eisenhower Matrix (Urgent/Important quadrants).
+2. **YouTube → Actionable Roadmap** — Paste any YouTube URL and AI extracts the transcript into a clean 4–8 step roadmap.
+3. **Voice Input** — Speak your thoughts naturally using voice-to-text, transcribed directly into the AI sorting pipeline.
+4. **Smart Node Search** — Instantly search across all canvas nodes by keyword, tag, or topic.
+5. **Reminders & Notifications** — Set due dates on tasks and get timely notifications.
+6. **Visual Canvas** — All goals, tasks, and knowledge become draggable nodes on a React Flow canvas.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+- Next.js 14
+- React
+- React Flow
+- Gemini API
+- MongoDB Atlas
+- Node.js
+- Tailwind CSS
+- TypeScript
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚧 Challenges We Ran Into
+
+1. **YouTube Transcript Extraction** — Handled videos without captions via proper error handling and fallback messages.
+2. **Gemini Response Parsing** — Added a cleanup layer to strip markdown code blocks before JSON parsing.
+3. **Real-time Voice Input** — Built a custom `useVoiceInput` hook to manage Web Speech API for interim transcripts and browser compatibility.
+4. **Local vs AI Classification Fallback** — Designed error boundaries for seamless fallback from Gemini AI to local keyword-based sorting.
