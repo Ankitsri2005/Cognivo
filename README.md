@@ -1,8 +1,8 @@
 # Cognivo — Visual Second Brain Canvas
 
-**Live Demo:** [https://cognivo-wltc.onrender.com](https://cognivo-wltc.onrender.com)
+**Live Demo:** https://cognivo-wltc.onrender.com
 
-**Demo Video:** [Add your YouTube/Loom link here]
+**Demo Video:** https://youtu.be/fInVPDobzoE
 
 An infinite spatial canvas for productivity and life-mapping. Built for the Devlynix Buildathon (Track 6).
 
