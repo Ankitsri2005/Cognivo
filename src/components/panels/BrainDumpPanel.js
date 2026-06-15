@@ -132,10 +132,11 @@ const BrainDumpPanel = () => {
 
               {/* Mic button — floating in top-right corner of textarea */}
               <button
-                className={`${styles.micBtn} ${isListening ? styles.micBtnActive : ''}`}
+                className={`${styles.micBtn} ${isListening ? styles.micBtnActive : ''} ${!isSupported ? styles.micUnsupported : ''}`}
                 onClick={isListening ? stopListening : startListening}
-                title={isListening ? 'Stop recording' : 'Start voice input'}
+                title={!isSupported ? 'Voice input requires Chrome or Edge' : isListening ? 'Stop recording' : 'Start voice input'}
                 aria-label={isListening ? 'Stop voice recording' : 'Start voice recording'}
+                disabled={!isSupported}
               >
                 <span className={styles.micRipple} />
                 {isListening ? <MicOff size={16} /> : <Mic size={16} />}

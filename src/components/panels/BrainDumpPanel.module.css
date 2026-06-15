@@ -122,6 +122,20 @@
   box-shadow: 0 0 12px rgba(45, 106, 79, 0.3);
 }
 
+.micUnsupported {
+  opacity: 0.35;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.micUnsupported:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-default);
+  color: var(--text-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
 /* Active (listening) state */
 .micBtnActive {
   background: var(--primary);

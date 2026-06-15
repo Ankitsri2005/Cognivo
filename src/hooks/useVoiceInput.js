@@ -14,10 +14,11 @@ export default function useVoiceInput({ onResult, language = 'en-US' } = {}) {
   const recognitionRef = useRef(null);
   const intentionalStopRef = useRef(false);
 
-  // Check support once (must be in browser context and have SpeechRecognition)
+  // Check if actually supported (exclude Brave — it has the API object but blocks requests)
   const isSupported =
     typeof window !== 'undefined' &&
-    ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+    ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) &&
+    !navigator.userAgent.includes('Brave');
 
   const clearError = useCallback(() => setError(null), []);
 
@@ -30,7 +31,7 @@ export default function useVoiceInput({ onResult, language = 'en-US' } = {}) {
 
   const startListening = useCallback(() => {
     if (!isSupported) {
-      setError('Voice input is only supported in Chrome or Edge browser. Please switch browsers to use this feature.');
+      setError('Use Chrome or Edge browser for voice input.');
       return;
     }
 

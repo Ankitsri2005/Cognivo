@@ -3,18 +3,24 @@ import { memo } from 'react';
 import { Handle, Position } from 'reactflow';
 import { CheckSquare, Calendar, AlertTriangle, Check } from 'lucide-react';
 import { getQuadrantInfo } from '@/utils/eisenhower';
+import useCanvasStore from '@/store/useCanvasStore';
 import styles from './TaskNode.module.css';
 
-const TaskNode = ({ data, selected }) => {
+const TaskNode = ({ data, selected, id }) => {
   const quadrantInfo = data.quadrant ? getQuadrantInfo(data.quadrant) : null;
   const isOverdue = data.deadline && new Date(data.deadline) < new Date() && !data.completed;
+  const updateNodeData = useCanvasStore((s) => s.updateNodeData);
+
+  const handleToggleComplete = () => {
+    updateNodeData(id, { completed: !data.completed });
+  };
 
   return (
     <div className={`${styles.node} ${selected ? styles.selected : ''} ${data.completed ? styles.completed : ''}`}>
       <Handle type="target" position={Position.Top} className={styles.handle} />
 
       <div className={styles.header}>
-        <button className={`${styles.checkbox} ${data.completed ? styles.checked : ''}`}>
+        <button className={`${styles.checkbox} ${data.completed ? styles.checked : ''}`} onClick={handleToggleComplete}>
           {data.completed && <Check size={12} />}
         </button>
         <h4 className={styles.title}>{data.label}</h4>

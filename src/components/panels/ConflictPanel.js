@@ -33,9 +33,9 @@ const ConflictPanel = () => {
   };
 
   useEffect(() => {
-    runDetection();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const detected = detectConflicts(nodes, 2);
+    setConflicts(detected);
+  }, [nodes, setConflicts]);
 
   return (
     <div className={styles.panel}>
