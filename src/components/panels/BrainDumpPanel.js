@@ -1,12 +1,13 @@
 'use client';
 import { useState, useCallback } from 'react';
-import { Sparkles, ArrowRight, Loader2, Zap, Mic, MicOff, AlertCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, Loader2, Zap, Mic, MicOff, AlertCircle, Clock, AlertTriangle, TrendingUp } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import EisenhowerMatrix from '@/components/eisenhower/EisenhowerMatrix';
 import useAppStore from '@/store/useAppStore';
 import useCanvasStore from '@/store/useCanvasStore';
 import { classifyLocally } from '@/utils/eisenhower';
 import { createGoalNode } from '@/utils/nodeFactory';
+import { checkCapacity } from '@/utils/capacityChecker';
 import useVoiceInput from '@/hooks/useVoiceInput';
 import styles from './BrainDumpPanel.module.css';
 
@@ -24,10 +25,12 @@ const BrainDumpPanel = () => {
   const [results, setResults] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [useAI, setUseAI] = useState(false);
+  const [capacityCheck, setCapacityCheck] = useState(null);
 
   const closePanel = useAppStore((s) => s.closePanel);
   const addToast = useAppStore((s) => s.addToast);
   const addNodes = useCanvasStore((s) => s.addNodes);
+  const existingNodes = useCanvasStore((s) => s.nodes);
 
   // Append each finalized speech chunk to the textarea
   const handleVoiceResult = useCallback((chunk) => {
@@ -46,6 +49,7 @@ const BrainDumpPanel = () => {
     setIsProcessing(true);
 
     try {
+      let classified;
       if (useAI) {
         // Try API route
         const res = await fetch('/api/brain-dump', {
@@ -55,18 +59,25 @@ const BrainDumpPanel = () => {
         });
         if (res.ok) {
           const data = await res.json();
-          setResults(data.tasks);
+          classified = data.tasks;
         } else {
-          // Fallback to local
-          setResults(classifyLocally(text));
+          classified = classifyLocally(text);
         }
       } else {
-        // Local classification
-        setResults(classifyLocally(text));
+        classified = classifyLocally(text);
       }
+
+      setResults(classified);
+
+      // ── Time Reality Check ──────────────────────────────────────────
+      const check = checkCapacity(existingNodes, classified);
+      setCapacityCheck(check.isOverloaded ? check : null);
+      // ────────────────────────────────────────────────────────────────
     } catch {
-      // Fallback
-      setResults(classifyLocally(text));
+      const classified = classifyLocally(text);
+      setResults(classified);
+      const check = checkCapacity(existingNodes, classified);
+      setCapacityCheck(check.isOverloaded ? check : null);
     } finally {
       setIsProcessing(false);
     }
@@ -91,6 +102,7 @@ const BrainDumpPanel = () => {
     addToast({ type: 'success', message: `${nodes.length} nodes added to canvas!` });
     closePanel();
   };
+
 
   return (
     <div className={styles.panel}>
@@ -221,8 +233,61 @@ const BrainDumpPanel = () => {
         <>
           <EisenhowerMatrix items={results} />
 
+          {/* ── Time Reality Check Warning ───────────────────────────── */}
+          {capacityCheck && (
+            <div className={`${styles.capacityWarning} ${capacityCheck.severity === 'danger' ? styles.capacityDanger : styles.capacityYellow}`}>
+              <div className={styles.capacityHeader}>
+                <div className={styles.capacityIconWrap}>
+                  {capacityCheck.severity === 'danger'
+                    ? <AlertTriangle size={18} />
+                    : <Clock size={18} />
+                  }
+                </div>
+                <div className={styles.capacityTitles}>
+                  <span className={styles.capacityTitle}>
+                    {capacityCheck.severity === 'danger' ? '⚠ Capacity Overload Detected' : '⏱ Tight Schedule Ahead'}
+                  </span>
+                  <span className={styles.capacitySubtitle}>Time Reality Check</span>
+                </div>
+                <button
+                  className={styles.capacityDismiss}
+                  onClick={() => setCapacityCheck(null)}
+                  title="Dismiss warning"
+                >✕</button>
+              </div>
+
+              <p className={styles.capacityMessage}>{capacityCheck.warning}</p>
+
+              <div className={styles.capacityStats}>
+                <div className={styles.capacityStat}>
+                  <TrendingUp size={12} />
+                  <span>{capacityCheck.stats.totalHours}h total work</span>
+                </div>
+                <div className={styles.capacityStatDivider} />
+                <div className={styles.capacityStat}>
+                  <Clock size={12} />
+                  <span>{capacityCheck.stats.availableHours}h available</span>
+                </div>
+                <div className={styles.capacityStatDivider} />
+                <div className={styles.capacityStat}>
+                  <AlertCircle size={12} />
+                  <span>{capacityCheck.stats.taskCount} tasks total</span>
+                </div>
+                {capacityCheck.stats.soonestDeadline && (
+                  <>
+                    <div className={styles.capacityStatDivider} />
+                    <div className={styles.capacityStat}>
+                      <span>📅 Nearest: {capacityCheck.stats.soonestDeadline}</span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+          {/* ────────────────────────────────────────────────────────── */}
+
           <div className={styles.resultActions}>
-            <Button variant="ghost" onClick={() => setResults(null)}>
+            <Button variant="ghost" onClick={() => { setResults(null); setCapacityCheck(null); }}>
               ← Back to Edit
             </Button>
             <Button icon={ArrowRight} onClick={handleAddToCanvas}>
@@ -231,6 +296,7 @@ const BrainDumpPanel = () => {
           </div>
         </>
       )}
+
     </div>
   );
 };

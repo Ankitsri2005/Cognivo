@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Map, Zap, Calendar, Target, CheckSquare } from 'lucide-react';
@@ -16,9 +17,11 @@ export default function Dashboard() {
   const setActivePanel = useAppStore((s) => s.setActivePanel);
   const router = useRouter();
 
-  if (!initialized) {
-    initFromStorage();
-  }
+  useEffect(() => {
+    if (!initialized) {
+      initFromStorage();
+    }
+  }, [initialized, initFromStorage]);
 
   const goalsCount = nodes.filter((n) => n.type === 'goalNode').length;
   const tasksCount = nodes.filter((n) => n.type === 'taskNode').length;

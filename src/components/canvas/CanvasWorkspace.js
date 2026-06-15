@@ -27,8 +27,9 @@ const nodeTypes = {
 
 const CanvasWorkspace = () => {
   const reactFlowWrapper = useRef(null);
-  const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [showAddMenu, setShowAddMenu] = useState(false);
+  const reactFlowInstance = useCanvasStore((s) => s.reactFlowInstance);
+  const setReactFlowInstance = useCanvasStore((s) => s.setReactFlowInstance);
 
   const nodes = useCanvasStore((s) => s.nodes);
   const edges = useCanvasStore((s) => s.edges);
@@ -67,7 +68,7 @@ const CanvasWorkspace = () => {
 
   const handleAddNode = (type) => {
     const center = reactFlowInstance
-      ? reactFlowInstance.project({
+      ? reactFlowInstance.screenToFlowPosition({
           x: window.innerWidth / 2,
           y: window.innerHeight / 2,
         })

@@ -33,6 +33,11 @@
   gap: var(--space-md);
 }
 
+/* ── Search Container ── */
+.searchContainer {
+  position: relative;
+}
+
 .searchWrap {
   display: flex;
   align-items: center;
@@ -45,11 +50,13 @@
   width: 220px;
 }
 
-.searchWrap:focus-within {
+.searchWrap:focus-within,
+.searchActive {
   border-color: var(--primary-border);
   background: var(--bg-elevated);
-  width: 280px;
+  width: 300px;
   box-shadow: 0 0 0 3px var(--primary-muted);
+  border-radius: var(--radius-md);
 }
 
 .searchIcon {
@@ -67,6 +74,181 @@
   color: var(--text-muted);
 }
 
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+}
+
+.clearBtn:hover {
+  background: var(--border-default);
+  color: var(--text-primary);
+}
+
+.kbdHint {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: var(--bg-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Search Dropdown ── */
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(45, 106, 79, 0.15);
+  overflow: hidden;
+  z-index: 100;
+  animation: dropdownFadeIn 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.dropdownHeader {
+  padding: 7px 12px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.searchResult {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.searchResult:last-child {
+  border-bottom: none;
+}
+
+.searchResult:hover,
+.searchResultActive {
+  background: var(--bg-hover);
+}
+
+.resultIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.resultContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.resultLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resultDesc {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resultMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.resultType {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.resultDeadline {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+}
+
+.resultArrow {
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.searchResult:hover .resultArrow,
+.searchResultActive .resultArrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* No results */
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.noResultsIcon {
+  opacity: 0.3;
+}
+
+/* ── Icon Button ── */
 .iconBtn {
   display: flex;
   align-items: center;
@@ -114,6 +296,17 @@
   }
 }
 
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     left: 0 !important;
@@ -129,6 +322,22 @@
   }
 
   .searchWrap {
+    width: 160px;
+    padding: 6px 10px;
+  }
+
+  .kbdHint {
     display: none;
+  }
+
+  .searchDropdown {
+    min-width: 260px;
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchWrap:focus-within {
+    width: 200px;
   }
 }

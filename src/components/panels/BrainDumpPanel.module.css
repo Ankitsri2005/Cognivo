@@ -375,6 +375,149 @@
   margin-top: var(--space-xl);
 }
 
+/* ── Time Reality Check — Capacity Warning Banner ── */
+.capacityWarning {
+  margin-top: var(--space-lg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1px solid;
+  animation: capacitySlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.capacityWarning::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background: repeating-linear-gradient(
+    45deg,
+    currentColor,
+    currentColor 1px,
+    transparent 1px,
+    transparent 12px
+  );
+  pointer-events: none;
+}
+
+.capacityDanger {
+  background: rgba(138, 43, 43, 0.1);
+  border-color: rgba(138, 43, 43, 0.4);
+  color: #ff9a9a;
+}
+
+.capacityYellow {
+  background: rgba(155, 122, 34, 0.1);
+  border-color: rgba(155, 122, 34, 0.4);
+  color: #f5c842;
+}
+
+.capacityHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.capacityIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.capacityTitles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.capacityTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.capacitySubtitle {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.6;
+  font-family: var(--font-mono);
+}
+
+.capacityDismiss {
+  font-size: 14px;
+  opacity: 0.5;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  line-height: 1;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.capacityDismiss:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.capacityMessage {
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: var(--space-sm);
+  opacity: 0.9;
+}
+
+.capacityStats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.capacityStat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  opacity: 0.85;
+}
+
+.capacityStatDivider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+@keyframes capacitySlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
 @media (max-width: 768px) {
   .panel {
     padding: var(--space-md);

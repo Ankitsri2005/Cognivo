@@ -37,6 +37,39 @@ const useCanvasStore = create((set, get) => ({
   edges: [],
   initialized: false,
 
+  // React Flow instance (set from CanvasWorkspace)
+  reactFlowInstance: null,
+  setReactFlowInstance: (instance) => set({ reactFlowInstance: instance }),
+
+  /**
+   * Search nodes by query string (matches label or description)
+   * Returns matching nodes sorted by relevance
+   */
+  searchNodes: (query) => {
+    if (!query || !query.trim()) return [];
+    const q = query.toLowerCase().trim();
+    return get().nodes.filter((n) => {
+      const label = (n.data?.label || '').toLowerCase();
+      const desc = (n.data?.description || '').toLowerCase();
+      return label.includes(q) || desc.includes(q);
+    });
+  },
+
+  /**
+   * Focus and highlight a node on the canvas
+   */
+  focusNode: (nodeId) => {
+    const instance = get().reactFlowInstance;
+    const node = get().nodes.find((n) => n.id === nodeId);
+    if (!instance || !node) return;
+
+    instance.setCenter(
+      node.position.x + (node.width ? node.width / 2 : 100),
+      node.position.y + (node.height ? node.height / 2 : 50),
+      { zoom: 1.2, duration: 600 }
+    );
+  },
+
   // Initialize from localStorage (call once on mount)
   initFromStorage: () => {
     const state = loadState();
@@ -60,6 +93,8 @@ const useCanvasStore = create((set, get) => ({
     });
   },
 
+
+  
   onConnect: (connection) => {
     set((state) => {
       const newEdges = addEdge(

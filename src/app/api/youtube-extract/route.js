@@ -52,6 +52,8 @@ export async function POST(req) {
     """
     `;
 
+
+    
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
     

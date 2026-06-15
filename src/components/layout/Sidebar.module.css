@@ -20,18 +20,19 @@
   width: var(--sidebar-collapsed);
 }
 
+/* ── Logo ── */
 .logo {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-lg) var(--space-md);
+  padding: 14px var(--space-md);
   border-bottom: 1px solid var(--border-subtle);
-  min-height: 72px;
+  min-height: 60px;
 }
 
 .logoIcon {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--green-800), var(--green-600));
   display: flex;
@@ -44,7 +45,7 @@
 
 .logo:hover .logoIcon {
   transform: scale(1.05);
-  box-shadow: 0 0 16px rgba(45, 106, 79, 0.3);
+  box-shadow: 0 0 14px rgba(45, 106, 79, 0.3);
 }
 
 .logoText {
@@ -54,45 +55,46 @@
 }
 
 .logoTitle {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
 }
 
 .logoSub {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
+/* ── Nav ── */
 .nav {
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-sm);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .sectionLabel {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--text-muted);
-  padding: var(--space-xs) var(--space-sm);
-  margin-bottom: 4px;
+  padding: 6px var(--space-sm) 4px;
   white-space: nowrap;
   min-height: 20px;
+  opacity: 0.7;
 }
 
 .navItem {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: 10px var(--space-sm);
-  border-radius: var(--radius-md);
+  padding: 8px var(--space-sm);
+  border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -104,7 +106,6 @@
 .navItem:hover {
   background: var(--bg-hover);
   color: var(--text-primary);
-  transform: translateX(2px);
 }
 
 .active {
@@ -119,16 +120,17 @@
   left: 0;
   top: 25%;
   height: 50%;
-  width: 3px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
   background: var(--primary-glow);
 }
 
+/* ── Actions ── */
 .actions {
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-sm);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -136,8 +138,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: 10px var(--space-sm);
-  border-radius: var(--radius-md);
+  padding: 8px var(--space-sm);
+  border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -149,7 +151,6 @@
 .actionItem:hover {
   background: var(--bg-hover);
   color: var(--text-primary);
-  transform: translateX(2px);
 }
 
 .actionIcon {
@@ -159,8 +160,9 @@
   flex-shrink: 0;
 }
 
+/* ── Bottom Button ── */
 .addBtnWrap {
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-sm);
   margin-top: auto;
 }
 
@@ -170,29 +172,30 @@
   justify-content: center;
   gap: var(--space-sm);
   width: 100%;
-  padding: 10px;
-  border-radius: var(--radius-md);
+  padding: 9px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--green-800), var(--green-700));
   color: var(--green-200);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   transition: all var(--transition-fast);
-  border: 1px solid var(--green-700);
+  border: 1px solid var(--green-800);
 }
 
 .addBtn:hover {
   background: linear-gradient(135deg, var(--green-700), var(--green-600));
-  box-shadow: 0 4px 16px rgba(45, 106, 79, 0.3);
+  box-shadow: 0 3px 12px rgba(45, 106, 79, 0.25);
   transform: translateY(-1px);
 }
 
+/* ── Collapse Toggle ── */
 .toggle {
   position: absolute;
   top: 50%;
-  right: -12px;
+  right: -10px;
   transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--bg-elevated);
   border: 1px solid var(--border-default);
@@ -210,6 +213,7 @@
   border-color: var(--primary-border);
 }
 
+/* ── Mobile ── */
 .backdrop {
   display: none;
 }
@@ -222,7 +226,7 @@
   .sidebar {
     transform: translateX(-100%);
     width: var(--sidebar-width) !important;
-    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.6);
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.5);
     z-index: 110;
   }
 
@@ -238,17 +242,17 @@
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.45);
     z-index: 105;
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.25s ease-out;
   }
 
   .mobileClose {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius: var(--radius-sm);
     color: var(--text-muted);
     margin-left: auto;
@@ -264,21 +268,17 @@
 @media (max-width: 480px) {
   .sidebar.open {
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
   }
 
   .navItem,
   .actionItem {
-    padding: 12px var(--space-sm);
-    font-size: 14px;
+    padding: 10px var(--space-sm);
+    font-size: 13px;
   }
 
   .logo {
     padding: var(--space-md);
-    min-height: 64px;
-  }
-
-  .logoTitle {
-    font-size: 14px;
+    min-height: 56px;
   }
 }
